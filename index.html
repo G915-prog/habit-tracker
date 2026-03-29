@@ -19,7 +19,6 @@
     --red-hi: #ef4444;
     --yellow: #ca8a04;
     --yellow-hi: #eab308;
-    --yellow-dim: rgba(202,138,4,0.14);
     --text: #ededed;
     --text2: #888;
     --muted: #444;
@@ -161,7 +160,7 @@
     animation: shake 0.28s ease;
   }
 
-  /* LIST */
+  /* HABITS LIST */
   #habits-list {
     display: flex;
     flex-direction: column;
@@ -189,22 +188,15 @@
   }
 
   .habit-card.done { border-color: rgba(220,38,38,0.18); }
-
-  .habit-card.drag-over {
-    border-color: var(--red);
-    box-shadow: 0 0 0 2px var(--red-dim);
-  }
-
+  .habit-card.drag-over { border-color: var(--red); box-shadow: 0 0 0 2px var(--red-dim); }
   .habit-card.dragging { opacity: 0.35; }
 
-  /* left color bar */
   .habit-color-bar {
     position: absolute;
     left: 0; top: 0; bottom: 0;
     width: 3px;
   }
 
-  /* MAIN ROW */
   .habit-main-row {
     display: flex;
     align-items: center;
@@ -247,7 +239,6 @@
   .habit-check:checked {
     background: var(--red);
     border-color: var(--red);
-    transform: scale(1);
     animation: pop 0.25s cubic-bezier(0.34,1.5,0.64,1);
   }
 
@@ -261,7 +252,6 @@
     transform: rotate(45deg);
   }
 
-  /* EMOJI BTN */
   .emoji-btn {
     background: none;
     border: none;
@@ -280,11 +270,7 @@
 
   .emoji-btn:hover { background: var(--surface3); }
 
-  /* INFO */
-  .habit-info {
-    flex: 1;
-    min-width: 0;
-  }
+  .habit-info { flex: 1; min-width: 0; }
 
   .habit-name {
     font-size: 0.88rem;
@@ -293,7 +279,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--text);
-    transition: color 0.2s, text-decoration 0.2s;
+    transition: color 0.2s;
   }
 
   .habit-card.done .habit-name {
@@ -313,7 +299,6 @@
 
   .habit-streak.hot { color: var(--yellow-hi); }
 
-  /* ACTIONS */
   .habit-actions {
     display: flex;
     align-items: center;
@@ -339,49 +324,6 @@
   .icon-btn:hover { color: var(--text2); background: var(--surface3); }
   .icon-btn.delete:hover { color: var(--red-hi); background: var(--red-dim); }
   .icon-btn svg { width: 13px; height: 13px; }
-
-  /* WEEKLY ROW */
-  .habit-week {
-    border-top: 1px solid var(--border);
-    padding: 0.5rem 0.9rem 0.55rem;
-    display: flex;
-    gap: 0.3rem;
-  }
-
-  .week-day {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.28rem;
-  }
-
-  .week-day-label {
-    font-size: 0.58rem;
-    color: var(--muted);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .week-day-dot {
-    width: 13px;
-    height: 13px;
-    border-radius: 3px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    transition: background 0.2s, border-color 0.2s;
-  }
-
-  .week-day-dot.done {
-    background: var(--red);
-    border-color: var(--red);
-  }
-
-  .week-day-dot.today {
-    outline: 1.5px solid var(--text2);
-    outline-offset: 1px;
-  }
 
   /* POPOVERS */
   .popover {
@@ -430,11 +372,7 @@
     margin-bottom: 0.45rem;
   }
 
-  .color-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
+  .color-grid { display: flex; flex-wrap: wrap; gap: 5px; }
 
   .color-swatch {
     width: 20px;
@@ -448,13 +386,131 @@
 
   .color-swatch:hover { transform: scale(1.18); }
   .color-swatch.active { border-color: var(--text) !important; }
+  .color-swatch.none { background: var(--surface3) !important; border: 1.5px dashed var(--muted) !important; }
 
-  .color-swatch.none {
-    background: var(--surface3) !important;
-    border: 1.5px dashed var(--muted) !important;
+  /* YEAR CALENDAR */
+  .year-cal-section {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
   }
 
-  /* CONFETTI */
+  .year-cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .year-cal-title {
+    font-size: 0.68rem;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .year-cal-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .legend-label {
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .legend-swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  .year-cal-scroll {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .year-cal-scroll::-webkit-scrollbar { height: 3px; }
+  .year-cal-scroll::-webkit-scrollbar-track { background: transparent; }
+  .year-cal-scroll::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 99px; }
+
+  .year-cal-inner {
+    display: flex;
+    gap: 0;
+  }
+
+  /* Day-of-week label column */
+  .cal-dow-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+
+  .cal-dow-spacer {
+    height: 14px; /* matches month label row */
+  }
+
+  .cal-dow-label {
+    width: 16px;
+    height: 11px;
+    font-size: 0.55rem;
+    color: var(--muted);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    letter-spacing: 0.02em;
+  }
+
+  /* Weeks grid */
+  #year-calendar {
+    display: flex;
+    gap: 2px;
+  }
+
+  .cal-week {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  .cal-month-label {
+    height: 14px;
+    font-size: 0.6rem;
+    color: var(--text2);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding-left: 1px;
+  }
+
+  .cal-day {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+    cursor: default;
+    transition: opacity 0.1s;
+  }
+
+  .cal-day:hover { opacity: 0.8; }
+  .cal-day.empty { background: transparent !important; }
+  .cal-day.future { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.04); }
+  .cal-day.past-none { background: var(--surface2); }
+  .cal-day.level-1 { background: #6b1d1d; }
+  .cal-day.level-2 { background: #991b1b; }
+  .cal-day.level-3 { background: #dc2626; }
+  .cal-day.level-all { background: #eab308; }
+  .cal-day.is-today { outline: 1.5px solid var(--text2); outline-offset: 1px; }
+
+  /* FIREWORKS CANVAS */
   #confetti-canvas {
     position: fixed;
     inset: 0;
@@ -518,6 +574,28 @@
   <div class="error-msg" id="error-msg" style="display:none"></div>
 
   <div id="habits-list"></div>
+
+  <!-- Year Calendar -->
+  <div class="year-cal-section" id="cal-section" style="display:none">
+    <div class="year-cal-header">
+      <span class="year-cal-title">This Year</span>
+      <div class="year-cal-legend">
+        <span class="legend-label">less</span>
+        <div class="legend-swatch" style="background:var(--surface2)"></div>
+        <div class="legend-swatch" style="background:#6b1d1d"></div>
+        <div class="legend-swatch" style="background:#991b1b"></div>
+        <div class="legend-swatch" style="background:#dc2626"></div>
+        <div class="legend-swatch" style="background:#eab308"></div>
+        <span class="legend-label">more</span>
+      </div>
+    </div>
+    <div class="year-cal-scroll">
+      <div class="year-cal-inner">
+        <div class="cal-dow-col" id="cal-dow-col"></div>
+        <div id="year-calendar"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="popover emoji-picker" id="emoji-picker" style="display:none">
@@ -575,18 +653,14 @@ function offsetDay(dateStr, n) {
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
+function dateToStr(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
 function formatDisplayDate(dateStr) {
   const d = new Date(dateStr + 'T12:00:00');
   return d.toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric' });
 }
-
-function getLast7(today) {
-  const days = [];
-  for (let i = 6; i >= 0; i--) days.push(offsetDay(today, -i));
-  return days;
-}
-
-const DAY_LABELS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
 
 // ── State ────────────────────────────────────────────────────────────────────
 let state = loadData();
@@ -606,15 +680,16 @@ state.habits.forEach(h => {
 saveData(state);
 
 // ── DOM refs ─────────────────────────────────────────────────────────────────
-const listEl   = document.getElementById('habits-list');
-const inputEl  = document.getElementById('habit-input');
-const addBtn   = document.getElementById('add-btn');
-const errEl    = document.getElementById('error-msg');
-const countEl  = document.getElementById('summary-count');
-const fillEl   = document.getElementById('progress-fill');
-const todayLbl = document.getElementById('today-label');
+const listEl        = document.getElementById('habits-list');
+const inputEl       = document.getElementById('habit-input');
+const addBtn        = document.getElementById('add-btn');
+const errEl         = document.getElementById('error-msg');
+const countEl       = document.getElementById('summary-count');
+const fillEl        = document.getElementById('progress-fill');
+const todayLbl      = document.getElementById('today-label');
 const emojiPickerEl = document.getElementById('emoji-picker');
 const colorPickerEl = document.getElementById('color-picker');
+const calSection    = document.getElementById('cal-section');
 
 todayLbl.textContent = formatDisplayDate(TODAY);
 
@@ -681,16 +756,18 @@ LABEL_COLORS.forEach(c => {
   colorGrid.appendChild(sw);
 });
 
-// ── Render ────────────────────────────────────────────────────────────────────
+// ── Render habits ─────────────────────────────────────────────────────────────
 function render() {
   listEl.innerHTML = '';
-  const last7 = getLast7(TODAY);
 
   if (state.habits.length === 0) {
     listEl.innerHTML = `<div class="empty-state"><strong>No habits yet.</strong><br>Add one above to get started.</div>`;
+    calSection.style.display = 'none';
     updateSummary();
     return;
   }
+
+  calSection.style.display = '';
 
   state.habits.forEach((h, idx) => {
     const done     = h.lastChecked === TODAY;
@@ -698,7 +775,7 @@ function render() {
     const hot      = h.streak >= 3;
 
     const card = document.createElement('div');
-    card.className  = 'habit-card' + (done ? ' done' : '');
+    card.className   = 'habit-card' + (done ? ' done' : '');
     card.dataset.id  = h.id;
     card.dataset.idx = idx;
     card.draggable   = true;
@@ -719,9 +796,7 @@ function render() {
         <button class="emoji-btn" title="Change emoji">${h.emoji}</button>
         <div class="habit-info">
           <div class="habit-name">${escHtml(h.name)}</div>
-          <div class="habit-streak${hot ? ' hot' : ''}">
-            🔥 ${h.streak} day streak
-          </div>
+          <div class="habit-streak${hot ? ' hot' : ''}">🔥 ${h.streak} day streak</div>
         </div>
         <div class="habit-actions">
           <button class="icon-btn color-action" title="Label color">
@@ -736,27 +811,10 @@ function render() {
             </svg>
           </button>
         </div>
-      </div>
-      <div class="habit-week">
-        ${last7.map(day => {
-          const d      = new Date(day + 'T12:00:00');
-          const label  = DAY_LABELS[d.getDay()];
-          const isDone = h.history.includes(day);
-          const isToday = day === TODAY;
-          const dotStyle = isDone && colorObj.hex
-            ? `background:${colorObj.hex};border-color:${colorObj.hex}`
-            : '';
-          return `<div class="week-day">
-            <span class="week-day-label">${label}</span>
-            <div class="week-day-dot${isDone ? ' done' : ''}${isToday ? ' today' : ''}" style="${dotStyle}"></div>
-          </div>`;
-        }).join('')}
       </div>`;
 
-    // Checkbox
     card.querySelector('.habit-check').addEventListener('change', e => toggle(h.id, e.target.checked));
 
-    // Emoji
     card.querySelector('.emoji-btn').addEventListener('click', e => {
       e.stopPropagation();
       if (activePopover === emojiPickerEl && activeHabitId === h.id) { closePopovers(); return; }
@@ -766,7 +824,6 @@ function render() {
       positionPopover(emojiPickerEl, e.currentTarget);
     });
 
-    // Color
     card.querySelector('.color-action').addEventListener('click', e => {
       e.stopPropagation();
       if (activePopover === colorPickerEl && activeHabitId === h.id) { closePopovers(); return; }
@@ -779,10 +836,8 @@ function render() {
       positionPopover(colorPickerEl, e.currentTarget);
     });
 
-    // Delete
     card.querySelector('.delete').addEventListener('click', () => deleteHabit(h.id, card));
 
-    // Drag
     card.addEventListener('dragstart',  onDragStart);
     card.addEventListener('dragend',    onDragEnd);
     card.addEventListener('dragover',   onDragOver);
@@ -793,6 +848,7 @@ function render() {
   });
 
   updateSummary();
+  renderCalendar();
 }
 
 function renderHabitEmoji(id, em) {
@@ -810,6 +866,108 @@ function updateSummary() {
 
 function escHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Year Calendar ─────────────────────────────────────────────────────────────
+const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DOW_LABELS  = ['Mo','Tu','We','Th','Fr','Sa','Su'];
+
+function renderCalendar() {
+  const calEl    = document.getElementById('year-calendar');
+  const dowCol   = document.getElementById('cal-dow-col');
+  calEl.innerHTML  = '';
+  dowCol.innerHTML = '';
+
+  const year  = new Date(TODAY + 'T12:00:00').getFullYear();
+  const start = new Date(year, 2, 1);   // March 1
+  const end   = new Date(year, 11, 31); // Dec 31
+  const todayD = new Date(TODAY + 'T12:00:00');
+
+  // Build completion map: dateStr -> count of habits done
+  const compMap = {};
+  const totalHabits = state.habits.length;
+  state.habits.forEach(h => {
+    (h.history || []).forEach(d => {
+      compMap[d] = (compMap[d] || 0) + 1;
+    });
+  });
+
+  // Find Monday on or before March 1 (week start = Monday)
+  const gridStart = new Date(start);
+  const dow = gridStart.getDay(); // 0=Sun
+  const backDays = dow === 0 ? 6 : dow - 1;
+  gridStart.setDate(gridStart.getDate() - backDays);
+
+  // Day-of-week label column
+  const spacer = document.createElement('div');
+  spacer.className = 'cal-dow-spacer';
+  dowCol.appendChild(spacer);
+  DOW_LABELS.forEach(label => {
+    const d = document.createElement('div');
+    d.className   = 'cal-dow-label';
+    d.textContent = label;
+    dowCol.appendChild(d);
+  });
+
+  // Build week columns
+  const cur = new Date(gridStart);
+  while (cur <= end) {
+    const weekCol = document.createElement('div');
+    weekCol.className = 'cal-week';
+
+    // Month label for this week
+    const labelEl = document.createElement('div');
+    labelEl.className = 'cal-month-label';
+    // Show month name if the 1st of any month falls in this week
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(cur);
+      d.setDate(d.getDate() + i);
+      if (d.getDate() === 1 && d >= start && d <= end) {
+        labelEl.textContent = MONTH_NAMES[d.getMonth()];
+        break;
+      }
+    }
+    weekCol.appendChild(labelEl);
+
+    // 7 day cells (Mon–Sun)
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(cur);
+      d.setDate(d.getDate() + i);
+      const cell = document.createElement('div');
+      cell.className = 'cal-day';
+
+      if (d < start || d > end) {
+        cell.classList.add('empty');
+      } else {
+        const ds    = dateToStr(d);
+        const count = compMap[ds] || 0;
+        const isToday  = ds === TODAY;
+        const isFuture = d > todayD;
+
+        if (isToday)       cell.classList.add('is-today');
+        if (isFuture) {
+          cell.classList.add('future');
+        } else if (count === 0) {
+          cell.classList.add('past-none');
+        } else if (totalHabits > 0 && count >= totalHabits) {
+          cell.classList.add('level-all');
+        } else if (count >= 3) {
+          cell.classList.add('level-3');
+        } else if (count === 2) {
+          cell.classList.add('level-2');
+        } else {
+          cell.classList.add('level-1');
+        }
+
+        cell.title = `${ds}  ${count}${totalHabits ? '/' + totalHabits : ''} habits`;
+      }
+
+      weekCol.appendChild(cell);
+    }
+
+    calEl.appendChild(weekCol);
+    cur.setDate(cur.getDate() + 7);
+  }
 }
 
 // ── Actions ───────────────────────────────────────────────────────────────────
@@ -862,28 +1020,18 @@ function toggle(id, checked) {
       streakEl.className = 'habit-streak' + (h.streak >= 3 ? ' hot' : '');
       streakEl.innerHTML = `🔥 ${h.streak} day streak`;
     }
-    // Update week dots
-    const colorObj = LABEL_COLORS.find(c => c.id === h.color) || LABEL_COLORS[0];
-    const last7    = getLast7(TODAY);
-    card.querySelectorAll('.week-day-dot').forEach((dot, i) => {
-      const day    = last7[i];
-      const isDone = h.history.includes(day);
-      dot.classList.toggle('done', isDone);
-      dot.style.background   = isDone && colorObj.hex ? colorObj.hex : '';
-      dot.style.borderColor  = isDone && colorObj.hex ? colorObj.hex : '';
-    });
   }
 
   updateSummary();
+  renderCalendar();
 
-  // Confetti
   if (checked) {
     const total = state.habits.length;
     const done  = state.habits.filter(x => x.lastChecked === TODAY).length;
     if (total > 0 && done === total) {
-      launchConfetti(true);
+      launchFireworks();
     } else {
-      launchConfetti(false);
+      launchBurst();
     }
   }
 }
@@ -906,10 +1054,7 @@ function showError(msg) {
   errTimer = setTimeout(hideError, 3000);
   inputEl.focus();
 }
-function hideError() {
-  errEl.style.display = 'none';
-  errEl.textContent   = '';
-}
+function hideError() { errEl.style.display = 'none'; errEl.textContent = ''; }
 
 // ── Events ────────────────────────────────────────────────────────────────────
 addBtn.addEventListener('click', addHabit);
@@ -946,94 +1091,198 @@ function onDrop(e) {
   render();
 }
 
-// ── Confetti ──────────────────────────────────────────────────────────────────
-const confettiCanvas = document.getElementById('confetti-canvas');
-const ctx = confettiCanvas.getContext('2d');
-let particles    = [];
-let confettiRAF  = null;
+// ── Canvas / Fireworks ────────────────────────────────────────────────────────
+const canvas = document.getElementById('confetti-canvas');
+const ctx    = canvas.getContext('2d');
+
+let rockets  = [];
+let sparks   = [];
+let bursters = [];
+let fwRAF    = null;
 
 function resizeCanvas() {
-  confettiCanvas.width  = window.innerWidth;
-  confettiCanvas.height = window.innerHeight;
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
-const C_COLORS = ['#dc2626','#ef4444','#ca8a04','#eab308','#fbbf24','#f97316','#ffffff','#d1d5db','#fde68a'];
+const FW_PALETTES = [
+  ['#ef4444','#fca5a5','#ffffff'],
+  ['#eab308','#fde047','#ffffff'],
+  ['#f97316','#fdba74','#ffffff'],
+  ['#dc2626','#eab308','#ffffff'],
+  ['#fbbf24','#ef4444','#ffffff'],
+];
 
-function mkParticle(x, y, vx, vy) {
-  return {
-    x, y, vx, vy,
-    color:    C_COLORS[Math.floor(Math.random() * C_COLORS.length)],
-    size:     Math.random() * 6 + 3,
-    rot:      Math.random() * Math.PI * 2,
-    rotSpeed: (Math.random() - 0.5) * 0.18,
-    alpha:    1,
-    rect:     Math.random() > 0.45,
-  };
+function randPalette() {
+  return FW_PALETTES[Math.floor(Math.random() * FW_PALETTES.length)];
 }
 
-function launchConfetti(big) {
+// Small burst for single habit
+function launchBurst() {
   resizeCanvas();
-  if (big) {
-    // Big: fall from top across full width
-    for (let i = 0; i < 220; i++) {
-      const x  = Math.random() * window.innerWidth;
-      const vx = (Math.random() - 0.5) * 3;
-      const vy = Math.random() * 2.5 + 1;
-      particles.push(mkParticle(x, -12, vx, vy));
-    }
-  } else {
-    // Small: radial burst from center
-    const cx = window.innerWidth / 2;
-    const cy = window.innerHeight * 0.48;
-    for (let i = 0; i < 45; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const spd   = Math.random() * 6 + 3;
-      particles.push(mkParticle(cx, cy, Math.cos(angle)*spd, Math.sin(angle)*spd - 2));
-    }
+  const cx = canvas.width / 2;
+  const cy = canvas.height * 0.45;
+  const colors = ['#ef4444','#eab308','#ffffff','#fbbf24'];
+  for (let i = 0; i < 32; i++) {
+    const angle = (i / 32) * Math.PI * 2;
+    const spd   = Math.random() * 5 + 2;
+    bursters.push({
+      x: cx, y: cy,
+      vx: Math.cos(angle) * spd,
+      vy: Math.sin(angle) * spd - 1,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      alpha: 1,
+      size:  Math.random() * 2.5 + 1,
+      decay: 0.028 + Math.random() * 0.012,
+    });
   }
-  if (!confettiRAF) animateConfetti();
+  if (!fwRAF) animateFW();
 }
 
-function animateConfetti() {
-  ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-  particles = particles.filter(p => p.alpha > 0.02);
+// Full fireworks for all habits done
+function launchFireworks() {
+  resizeCanvas();
+  const count = 6 + Math.floor(Math.random() * 3);
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const palette = randPalette();
+      rockets.push({
+        x:       canvas.width * (0.15 + Math.random() * 0.7),
+        y:       canvas.height + 10,
+        vx:      (Math.random() - 0.5) * 1.5,
+        vy:      -(13 + Math.random() * 7),
+        targetY: canvas.height * (0.08 + Math.random() * 0.32),
+        palette,
+        trail:   [],
+        done:    false,
+      });
+      if (!fwRAF) animateFW();
+    }, i * 280 + Math.random() * 120);
+  }
+}
 
-  for (const p of particles) {
-    p.x   += p.vx;
-    p.y   += p.vy;
-    p.vy  += 0.18;   // gravity
-    p.vx  *= 0.99;
-    p.rot += p.rotSpeed;
-    if (p.y > confettiCanvas.height * 0.75) p.alpha -= 0.025;
+function explodeRocket(x, y, palette) {
+  const count = 80 + Math.floor(Math.random() * 50);
+  for (let i = 0; i < count; i++) {
+    const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.3;
+    const spd   = (Math.random() * 4.5 + 1.5) * (Math.random() > 0.3 ? 1 : 0.4);
+    sparks.push({
+      x, y,
+      vx:    Math.cos(angle) * spd,
+      vy:    Math.sin(angle) * spd,
+      color: palette[Math.floor(Math.random() * palette.length)],
+      alpha: 1,
+      size:  Math.random() * 2.2 + 0.8,
+      decay: 0.010 + Math.random() * 0.014,
+      trail: [],
+    });
+  }
+  // Add a few glitter sparks that fall slower
+  for (let i = 0; i < 20; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    sparks.push({
+      x, y,
+      vx:    Math.cos(angle) * (Math.random() * 1.5),
+      vy:    Math.sin(angle) * (Math.random() * 1.5) - 1,
+      color: '#ffffff',
+      alpha: 1,
+      size:  Math.random() * 1.5 + 0.5,
+      decay: 0.006 + Math.random() * 0.008,
+      trail: [],
+    });
+  }
+}
 
-    ctx.save();
-    ctx.globalAlpha = p.alpha;
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rot);
-    ctx.fillStyle = p.color;
-    if (p.rect) {
-      ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
-    } else {
-      ctx.beginPath();
-      ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-      ctx.fill();
+function animateFW() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Rockets
+  rockets = rockets.filter(r => !r.done);
+  for (const r of rockets) {
+    r.trail.unshift({ x: r.x, y: r.y });
+    if (r.trail.length > 14) r.trail.pop();
+    r.x  += r.vx;
+    r.y  += r.vy;
+    r.vy += 0.22; // drag slows ascent
+
+    // Trail
+    r.trail.forEach((p, i) => {
+      ctx.globalAlpha = (1 - i / r.trail.length) * 0.65;
+      ctx.fillStyle   = r.palette[0];
+      const s = Math.max(0.5, 2 - i * 0.15);
+      ctx.fillRect(p.x - s/2, p.y, s, s * 2);
+    });
+
+    // Head glow
+    ctx.globalAlpha = 1;
+    ctx.fillStyle   = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(r.x, r.y, 2.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (r.y <= r.targetY) {
+      r.done = true;
+      explodeRocket(r.x, r.y, r.palette);
     }
-    ctx.restore();
   }
 
-  if (particles.length > 0) {
-    confettiRAF = requestAnimationFrame(animateConfetti);
+  // Explosion sparks
+  sparks = sparks.filter(s => s.alpha > 0.02);
+  for (const s of sparks) {
+    s.trail.unshift({ x: s.x, y: s.y });
+    if (s.trail.length > 6) s.trail.pop();
+    s.x   += s.vx;
+    s.y   += s.vy;
+    s.vy  += 0.09;  // gravity
+    s.vx  *= 0.985;
+    s.alpha -= s.decay;
+
+    // Trail
+    s.trail.forEach((p, i) => {
+      ctx.globalAlpha = s.alpha * (1 - i / s.trail.length) * 0.4;
+      ctx.fillStyle   = s.color;
+      ctx.fillRect(p.x - s.size/2, p.y - s.size/2, s.size, s.size);
+    });
+
+    // Spark dot
+    ctx.globalAlpha = s.alpha;
+    ctx.fillStyle   = s.color;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Small bursters
+  bursters = bursters.filter(b => b.alpha > 0.02);
+  for (const b of bursters) {
+    b.x    += b.vx;
+    b.y    += b.vy;
+    b.vy   += 0.12;
+    b.vx   *= 0.97;
+    b.alpha -= b.decay;
+
+    ctx.globalAlpha = b.alpha;
+    ctx.fillStyle   = b.color;
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.globalAlpha = 1;
+
+  if (rockets.length || sparks.length || bursters.length) {
+    fwRAF = requestAnimationFrame(animateFW);
   } else {
-    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-    confettiRAF = null;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    fwRAF = null;
   }
 }
 
 // ── Midnight reset ────────────────────────────────────────────────────────────
 function scheduleMidnightReset() {
-  const now      = new Date();
+  const now = new Date();
   const midnight = new Date(now);
   midnight.setHours(24, 0, 0, 0);
   setTimeout(() => {
